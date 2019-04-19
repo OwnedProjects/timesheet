@@ -1,0 +1,49 @@
+<form class="form-signin">
+  <div class="text-center my-4">
+    <h1 class="h3 my-3 font-weight-normal">LOGIN</h1>
+  </div>
+
+  <div class="form-label-group">
+    <input
+      type="email"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Email address"
+      required
+      autofocus
+      [(ngModel)]="emailadd"
+      name="emailadd"
+    />
+    <label for="inputEmail">Email address</label>
+  </div>
+
+  <div class="form-label-group">
+    <input
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="Password"
+      required
+      [(ngModel)]="passwd"
+      name="passwd"
+      (keyup)="checkEvent($event)"
+    />
+    <label for="inputPassword">Password</label>
+  </div>
+
+  <div class="checkbox mb-3">
+    <p *ngIf="showspinner" class="text-primary">
+      <i class="fas fa-circle-notch fa-spin"></i> Please wait...
+    </p>
+    <label><a [routerLink]="['/register']">Click here</a> to register </label>
+  </div>
+  <button
+    class="btn btn-lg btn-primary btn-block"
+    type="button"
+    [disabled]="!emailadd || !passwd"
+    (click)="login()"
+  >
+    Sign in
+  </button>
+  <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2019</p>
+</form>

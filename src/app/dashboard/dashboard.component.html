@@ -1,0 +1,223 @@
+<div class="container my-5">
+  <h3>
+    Welcome <span class="text-primary">{{ userdet.name }}</span>
+    <div class="float-right logoutbtn mt-2">
+      <a href="javascript:void(0);" class="text-info" (click)="logout()"
+        >Logout</a
+      >
+    </div>
+  </h3>
+  <div class="alert alert-success" role="alert" *ngIf="successmsg">
+    {{ successmsg }}
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-12 text-right">
+      <label class="mx-3 font-weight-bold"
+        >Data for
+        <span class="font-italic border-bottom border-primary">{{
+          selectedmonth | date: "MMMM, yyyy"
+        }}</span></label
+      >
+      <button class="btn-info btn-sm btn" (click)="setPreviousMonth()">
+        Previous Month
+      </button>
+      <button class="btn-info btn-sm btn ml-3" (click)="setCurrentMonth()">
+        Current Month
+      </button>
+      <button class="btn-info btn-sm btn ml-3" (click)="setNextMonth()">
+        Next Month
+      </button>
+    </div>
+  </div>
+  <div class="row" *ngFor="let row of dayrows">
+    <div class="daywrapper w-100 text-right">
+      <div class="daybox text-center mb-3" *ngFor="let day of row">
+        <div
+          class="mx-3 border dayboxwrapper"
+          [ngClass]="{
+            noday: day.noday,
+            'bg-primary text-white': day.getdate == todaydt && currentmnth
+          }"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          (click)="getDateDetails(day)"
+        >
+          <div
+            class="ribbon"
+            *ngIf="day.ribbon"
+            [ngClass]="{
+              'text-white': day.getdate == todaydt && currentmnth,
+              'text-primary': day.getdate != todaydt && currentmnth
+            }"
+          >
+            <i class="fas fa-bookmark"></i>
+          </div>
+          <div class="day-body p-4">
+            <span
+              class="font-weight-bold border-bottom "
+              [ngClass]="{
+                'text-white border-white':
+                  day.getdate == todaydt && currentmnth,
+                'text-primary border-secondary':
+                  day.getdate != todaydt && currentmnth,
+                'text-middle': !day.ribbon
+              }"
+              >{{ day.getdate }}</span
+            >
+            <div class="mt-2" *ngIf="day.ribbon">{{ day.intime }}</div>
+            <div *ngIf="day.ribbon">{{ day.outtime }}</div>
+          </div>
+          <div
+            class="day-footer px-3 py-1 text-white"
+            [ngClass]="{
+              'bg-secondary': day.getday !== 'Sat' && day.getday !== 'Sun',
+              'bg-danger': day.getday === 'Sat' || day.getday === 'Sun'
+            }"
+          >
+            {{ day.getday }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Time Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  *ngIf="selectedday"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{ selectedday.getdate }} - {{ selectedday.getday }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <label class="m-0">Enter IN time (0-23 hours & 0-59 mins)</label>
+              <div class="row">
+                <div class="col-md-5">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="HH"
+                    maxlength="2"
+                    [(ngModel)]="inhours"
+                    [disabled]="
+                      disablefields || !currentmnth || greaterthantoday
+                    "
+                  />
+                </div>
+                <div class="col-md-1">
+                  <h6 class="my-2">:</h6>
+                </div>
+                <div class="col-md-5">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="MM"
+                    maxlength="2"
+                    [(ngModel)]="inmins"
+                    [disabled]="
+                      disablefields || !currentmnth || greaterthantoday
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 my-4">
+              <label class="m-0">Enter OUT time (0-23 hours & 0-59 mins)</label>
+              <div class="row">
+                <div class="col-md-5">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="HH"
+                    maxlength="2"
+                    [(ngModel)]="outhours"
+                    [disabled]="
+                      disablefields || !currentmnth || greaterthantoday
+                    "
+                  />
+                </div>
+                <div class="col-md-1">
+                  <h6 class="my-2">:</h6>
+                </div>
+                <div class="col-md-5">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="MM"
+                    maxlength="2"
+                    [(ngModel)]="outmins"
+                    [disabled]="
+                      disablefields || !currentmnth || greaterthantoday
+                    "
+                  />
+                </div>
+              </div>
+              <p class="text-primary m-3" *ngIf="disablefields">
+                <i class="fas fa-circle-notch fa-spin"></i> Please wait...
+              </p>
+              <p class="text-danger m-3" *ngIf="!currentmnth">
+                <i class="fas fa-exclamation-triangle"></i> You can only edit
+                current months data
+              </p>
+              <p class="text-danger m-3" *ngIf="greaterthantoday">
+                <i class="fas fa-exclamation-triangle"></i> You cannot enter
+                timesheet on the selected date!
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="m-0">Enter Comments (optional)</label>
+            <textarea
+              rows="5"
+              class="form-control"
+              placeholder="Enter Comments"
+              [(ngModel)]="comments"
+              [disabled]="disablefields || !currentmnth || greaterthantoday"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="
+            !inhours ||
+            !inmins ||
+            greaterthantoday ||
+            !currentmnth ||
+            disablefields
+          "
+          data-dismiss="modal"
+          (click)="saveTimesheet()"
+        >
+          Save Timesheet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

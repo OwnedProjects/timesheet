@@ -1,0 +1,36 @@
+.daybox {
+  display: inline-block;
+}
+
+.dayboxwrapper {
+  width: 110px;
+  cursor: pointer;
+  position: relative;
+}
+
+.row {
+  margin: 0 auto;
+}
+
+.noday,
+.hidden {
+  visibility: hidden;
+}
+
+.logoutbtn {
+  font-size: 1rem;
+}
+
+textarea {
+  resize: none;
+}
+
+.text-middle {
+  line-height: 80px;
+}
+/* Ribbon */
+.ribbon {
+  position: absolute;
+  right: 5px;
+  top: -5px;
+}

@@ -1,0 +1,94 @@
+<form class="form-signin">
+  <div class="text-center my-4">
+    <h1 class="h3 my-3 font-weight-normal">REGISTER</h1>
+  </div>
+  <div class="alert alert-success" role="alert" *ngIf="regsucess">
+    <i class="fas fa-check"></i> Registration successful.
+  </div>
+  <div class="form-label-group">
+    <input
+      type="email"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Email address"
+      (blur)="checkEmail()"
+      [(ngModel)]="emailadd"
+      name="emailadd"
+      [ngClass]="{
+        'border-danger': emailispresent == true,
+        'border-success': emailispresent == false
+      }"
+      required
+      autofocus
+    />
+    <label for="inputEmail">Email address</label>
+    <p
+      [ngClass]="{
+        'text-danger': emailispresent == true,
+        'text-success': emailispresent == false
+      }"
+      *ngIf="showmsg"
+    >
+      <i
+        class="fas "
+        [ngClass]="{
+          'fa-check': emailispresent == true,
+          'fa-check': emailispresent == false
+        }"
+      ></i>
+      Email id is available
+    </p>
+  </div>
+
+  <div class="form-label-group">
+    <input
+      type="text"
+      id="inputName"
+      class="form-control"
+      placeholder="Enter your name"
+      [(ngModel)]="name"
+      name="name"
+      required
+    />
+    <label for="inputName">Enter your name</label>
+  </div>
+
+  <div class="form-label-group">
+    <input
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="Password"
+      [(ngModel)]="pass"
+      name="pass"
+      required
+    />
+    <label for="inputPassword">Password</label>
+  </div>
+
+  <div class="form-label-group">
+    <input
+      type="password"
+      id="inputConfPassword"
+      class="form-control"
+      placeholder="Confirm Password"
+      [(ngModel)]="confpass"
+      name="confpass"
+      required
+    />
+    <label for="inputConfPassword">Confirm Password</label>
+  </div>
+
+  <div class="checkbox mb-3">
+    <label><a [routerLink]="['/signin']">Click here</a> to Login </label>
+  </div>
+  <button
+    class="btn btn-lg btn-primary btn-block"
+    type="button"
+    [disabled]="!emailadd || !name || !pass || !confpass || pass != confpass"
+    (click)="registerUser()"
+  >
+    Sign Up
+  </button>
+  <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2019</p>
+</form>
