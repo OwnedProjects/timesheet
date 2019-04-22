@@ -36,7 +36,9 @@
           class="mx-3 border dayboxwrapper"
           [ngClass]="{
             noday: day.noday,
-            'bg-primary text-white': day.getdate == todaydt && currentmnth
+            'bg-primary text-white': day.getdate == todaydt && currentmnth,
+            'bg-danger': day.getdate == todaydt && danger,
+            'bg-success': day.getdate == todaydt && success
           }"
           data-toggle="modal"
           data-target="#exampleModal"
