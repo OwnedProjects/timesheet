@@ -34,3 +34,18 @@ textarea {
   right: 5px;
   top: -5px;
 }
+
+.dayboxwrapper.bg-danger,
+.dayboxwrapper.bg-primary,
+.dayboxwrapper.bg-success,
+.dayboxwrapper.bg-warning {
+  color: #ffffff !important;
+}
+
+.dayboxwrapper.bg-danger span,
+.dayboxwrapper.bg-primary span,
+.dayboxwrapper.bg-success span,
+.dayboxwrapper.bg-warning span {
+  color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
+}

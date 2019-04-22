@@ -36,9 +36,10 @@
           class="mx-3 border dayboxwrapper"
           [ngClass]="{
             noday: day.noday,
-            'bg-primary text-white': day.getdate == todaydt && currentmnth,
-            'bg-danger': day.getdate == todaydt && danger,
-            'bg-success': day.getdate == todaydt && success
+            'bg-primary': day.getdate == todaydt && currentmnth,
+            'bg-danger': day.bgclass == 'danger',
+            'bg-warning': day.bgclass == 'warning',
+            'bg-success': day.bgclass == 'success'
           }"
           data-toggle="modal"
           data-target="#exampleModal"
@@ -48,8 +49,17 @@
             class="ribbon"
             *ngIf="day.ribbon"
             [ngClass]="{
-              'text-white': day.getdate == todaydt && currentmnth,
-              'text-primary': day.getdate != todaydt && currentmnth
+              'text-white':
+                (day.getdate == todaydt && currentmnth) ||
+                (day.bgclass == 'danger' ||
+                  day.bgclass == 'warning' ||
+                  day.bgclass == 'success'),
+              'text-primary':
+                day.getdate != todaydt &&
+                currentmnth &&
+                (day.bgclass != 'danger' &&
+                  day.bgclass != 'warning' &&
+                  day.bgclass != 'success')
             }"
           >
             <i class="fas fa-bookmark"></i>
