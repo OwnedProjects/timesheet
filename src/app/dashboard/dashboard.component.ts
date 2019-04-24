@@ -82,7 +82,9 @@ export class DashboardComponent implements OnInit {
 					getday: this.returnWeekDay(new Date(currdt).getDay()),
 					intime: '00:00',
 					outtime: '00:00',
-					ribbon: false
+					ribbon: false,
+					bgclass: null,
+					totalHrs: null
 				};
 				for (let k in firearr) {
 					let intm = new Date(firearr[k].intime);
@@ -95,17 +97,15 @@ export class DashboardComponent implements OnInit {
 						dtobj.intime = inhr + ':' + inmin;
 						dtobj.outtime = outhr + ':' + outmin;
 						dtobj.ribbon = true;
-						let diff = new Date(intm).getTime() - new Date(outtm).getTime();
+						let diff = new Date(outtm).getTime() - new Date(intm).getTime();
+						dtobj.totalHrs = (diff / 36e5).toFixed(2);
 						console.log(diff);
-						if (-28800000 < diff) {
-							this.danger = true;
+						if (diff < 28800000) {
+							dtobj.bgclass = 'danger';
+						} else if (diff < 32400000) {
+							dtobj.bgclass = 'warning';
 						} else {
-							this.danger = false;
-						}
-						if (-32400000 > diff) {
-							this.success = true;
-						} else {
-							this.success = false;
+							dtobj.bgclass = 'success';
 						}
 						break;
 					}

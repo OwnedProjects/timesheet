@@ -1,36 +1,63 @@
 .daybox {
-  display: inline-block;
+	display: inline-block;
 }
-
+.totalHours {
+	display: none;
+}
 .dayboxwrapper {
-  width: 110px;
-  cursor: pointer;
-  position: relative;
+	width: 110px;
+	cursor: pointer;
+	position: relative;
+	box-shadow: 3px 3px 10px grey;
 }
-
+.dayboxwrapper:hover .totalHours {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: #fff;
+	width: 109px;
+	padding-top: 55px;
+	padding-bottom: 58px;
+	background: #0000008f;
+}
 .row {
-  margin: 0 auto;
+	margin: 0 auto;
 }
 
 .noday,
 .hidden {
-  visibility: hidden;
+	visibility: hidden;
 }
 
 .logoutbtn {
-  font-size: 1rem;
+	font-size: 1rem;
 }
 
 textarea {
-  resize: none;
+	resize: none;
 }
 
 .text-middle {
-  line-height: 80px;
+	line-height: 80px;
 }
 /* Ribbon */
 .ribbon {
-  position: absolute;
-  right: 5px;
-  top: -5px;
+	position: absolute;
+	right: 5px;
+	top: -5px;
+}
+.dayboxwrapper.bg-danger,
+.dayboxwrapper.bg-primary,
+.dayboxwrapper.bg-success,
+.dayboxwrapper.bg-warning {
+	color: #ffffff !important;
+}
+
+.dayboxwrapper.bg-danger span,
+.dayboxwrapper.bg-primary span,
+.dayboxwrapper.bg-success span,
+.dayboxwrapper.bg-warning span {
+	color: #ffffff !important;
+	border-bottom-color: #ffffff !important;
 }

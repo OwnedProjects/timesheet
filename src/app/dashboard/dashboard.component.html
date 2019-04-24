@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-4 bg-light" >
   <h3>
     Welcome <span class="text-primary">{{ userdet.name }}</span>
     <div class="float-right logoutbtn mt-2">
@@ -29,16 +29,32 @@
       </button>
     </div>
   </div>
+  <div class="row mb-3">
+    <div class="col-md-12 text-right">
+      <label class="mx-3 font-weight-bold"
+        >
+        <span class="fas fa-bookmark text-danger mr-2"></span>Below 8 Hours</label
+      >
+      <label class="mx-3 font-weight-bold"
+        >
+        <span class="fas fa-bookmark text-warning mr-2"></span>Between 8 and 9 Hours</label
+      >
+      <label class="mx-3 font-weight-bold"
+        >
+        <span class="fas fa-bookmark text-success mr-2"></span>Above 9 Hours</label
+      >
+    </div>
+  </div>
   <div class="row" *ngFor="let row of dayrows">
     <div class="daywrapper w-100 text-right">
       <div class="daybox text-center mb-3" *ngFor="let day of row">
         <div
           class="mx-3 border dayboxwrapper"
           [ngClass]="{
-            noday: day.noday,
+            noday: day.noday,           
             'bg-primary text-white': day.getdate == todaydt && currentmnth,
-            'bg-danger': day.getdate == todaydt && danger,
-            'bg-success': day.getdate == todaydt && success
+            'bg-primary': day.getdate == todaydt && currentmnth
+           
           }"
           data-toggle="modal"
           data-target="#exampleModal"
@@ -49,7 +65,10 @@
             *ngIf="day.ribbon"
             [ngClass]="{
               'text-white': day.getdate == todaydt && currentmnth,
-              'text-primary': day.getdate != todaydt && currentmnth
+              'text-primary': day.getdate != todaydt && currentmnth,
+              'text-danger': day.bgclass == 'danger',
+              'text-warning': day.bgclass == 'warning',
+              'text-success': day.bgclass == 'success'
             }"
           >
             <i class="fas fa-bookmark"></i>
@@ -68,6 +87,7 @@
             >
             <div class="mt-2" *ngIf="day.ribbon">{{ day.intime }}</div>
             <div *ngIf="day.ribbon">{{ day.outtime }}</div>
+            <div class="font-weight-bold totalHours" *ngIf="day.ribbon">{{ day.totalHrs }} <br/>Hours</div>
           </div>
           <div
             class="day-footer px-3 py-1 text-white"
