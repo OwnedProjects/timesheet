@@ -1,4 +1,4 @@
-<div class="container my-4 bg-light" >
+<div class="container my-4 bg-light maindiv" >
   <h3>
     Welcome <span class="text-primary">{{ userdet.name }}</span>
     <div class="float-right logoutbtn mt-2">
@@ -53,7 +53,8 @@
           [ngClass]="{
             noday: day.noday,           
             'bg-primary text-white': day.getdate == todaydt && currentmnth,
-            'bg-primary': day.getdate == todaydt && currentmnth
+            'bg-primary': day.getdate == todaydt && currentmnth,
+            'bg-white': day.getdate != todaydt && currentmnth
            
           }"
           data-toggle="modal"
@@ -75,11 +76,11 @@
           </div>
           <div class="day-body p-2">
             <span
-              class="font-weight-bold border-bottom "
+              class="font-weight-bold"
               [ngClass]="{
-                'text-white border-white':
+                'text-white':
                   day.getdate == todaydt && currentmnth,
-                'text-primary border-secondary':
+                'dateColor':
                   day.getdate != todaydt && currentmnth,
                 'text-middle': !day.ribbon
               }"
@@ -90,10 +91,10 @@
             <div class="font-weight-bold totalHours" *ngIf="day.ribbon">{{ day.totalHrs }} <br/>Hours</div>
           </div>
           <div
-            class="day-footer px-3 py-1 text-white"
+            class="day-footer px-3 py-1 font-weight-bold dayName"
             [ngClass]="{
-              'bg-secondary': day.getday !== 'Sat' && day.getday !== 'Sun',
-              'bg-danger': day.getday === 'Sat' || day.getday === 'Sun'
+              'monTothu': day.getday !== 'Sat' && day.getday !== 'Sun',
+              'satsun': day.getday === 'Sat' || day.getday === 'Sun'
             }"
           >
             {{ day.getday }}

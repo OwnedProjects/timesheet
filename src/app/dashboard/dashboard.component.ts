@@ -112,10 +112,10 @@ export class DashboardComponent implements OnInit {
 				}
 
 				dtarr.push(dtobj);
-				if (cnt % 7 == 0) {
+				if (cnt % 7 == 1) {
 					rowarr.push(dtarr);
 					dtarr = [];
-					cnt = 0;
+					cnt = 1;
 				}
 				cnt++;
 			}
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
 			}
 			//console.log(rowarr);
 			//This loop is to adjust the empty blocks at the end of the month
-			let tmpcnt = 8 - cnt;
+			let tmpcnt = 9 - cnt;
 			//console.log(tmpcnt);
 			for (let j = 0; j < tmpcnt; j++) {
 				let dtobj = {
@@ -133,6 +133,7 @@ export class DashboardComponent implements OnInit {
 					noday: true,
 					getday: 'no day'
 				};
+				console.log(tmpcnt);
 				rowarr[rowarr.length - 1].push(dtobj);
 			}
 

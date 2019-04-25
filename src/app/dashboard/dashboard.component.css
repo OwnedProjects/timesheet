@@ -1,3 +1,8 @@
+.maindiv {
+	background: url('images.jpg') no-repeat;
+	background-size: 100% 100%;
+}
+
 .daybox {
 	display: inline-block;
 }
@@ -60,4 +65,17 @@ textarea {
 .dayboxwrapper.bg-warning span {
 	color: #ffffff !important;
 	border-bottom-color: #ffffff !important;
+}
+.monTothu {
+	background-color: #a2f2ff !important;
+}
+
+.satsun {
+	background-color: #c0ffb4 !important;
+}
+.dayName {
+	color: #6b6b84 !important;
+}
+.dateColor {
+	color: #454f5a !important;
 }
