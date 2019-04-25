@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
 
 			let rowarr = [];
 			let tmpdt = currdate.setDate(1);
-			let cnt = new Date(tmpdt).getDay() + 1;
+			let cnt = new Date(tmpdt).getDay();
 			let dtarr = [];
 			for (let i = mntstartdt; i <= mntenddt; i++) {
 				let currdt = currdate.setDate(i);
@@ -112,10 +112,10 @@ export class DashboardComponent implements OnInit {
 				}
 
 				dtarr.push(dtobj);
-				if (cnt % 7 == 1) {
+				if (cnt % 7 == 0) {
 					rowarr.push(dtarr);
 					dtarr = [];
-					cnt = 1;
+					cnt = 0;
 				}
 				cnt++;
 			}
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
 			}
 			//console.log(rowarr);
 			//This loop is to adjust the empty blocks at the end of the month
-			let tmpcnt = 9 - cnt;
+			let tmpcnt = 8 - cnt;
 			//console.log(tmpcnt);
 			for (let j = 0; j < tmpcnt; j++) {
 				let dtobj = {
