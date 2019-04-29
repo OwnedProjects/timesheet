@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit {
 						dtobj.ribbon = true;
 						let diff = new Date(outtm).getTime() - new Date(intm).getTime();
 						dtobj.totalHrs = (diff / 36e5).toFixed(2);
-						console.log(diff);
+						//console.log(diff);
 						if (diff < 28800000) {
 							dtobj.bgclass = 'danger';
 						} else if (diff < 32400000) {
@@ -133,7 +133,7 @@ export class DashboardComponent implements OnInit {
 					noday: true,
 					getday: 'no day'
 				};
-				console.log(tmpcnt);
+				//console.log(tmpcnt);
 				rowarr[rowarr.length - 1].push(dtobj);
 			}
 
